@@ -1,0 +1,21 @@
+\documentclass[11pt]{book}
+\usepackage{microtype}
+\usepackage{kpfonts}
+
+% Used by pandoc
+\providecommand{\tightlist}{
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+%\title{$title$}
+%\shorttitle{$shorttitle$}
+% The \vspace is used to remove inexplicable extra space between
+% the title and author on the title page.
+% TODO: Fix this
+%\author{\vspace{-1.5em}$author$}
+%\affiliation{$affiliation$}
+%\abstract{\input{abstract}}
+
+$body$
+
+\end{document}

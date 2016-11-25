@@ -50,9 +50,8 @@ BEGIN {
 }
 {
     if (incontents==1) {
-        gsub(/\n/, " ")
-        gsub(/ +/, " ")
-        gsub(/_/, "")
+        gsub(/\s+/, " ")
+        $0 = gensub(/_(.*)_/, "\\\\textit{\\1}", "g")
 	gsub(/[0-9]+/, "\\textbf{&}")
         contentsdescs[contentsdescnum++] = $0
     }

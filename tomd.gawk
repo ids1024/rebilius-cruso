@@ -12,7 +12,7 @@ BEGIN {
 /CONTENTS/ {
     a=0
     incontents=1
-    print "\\tableofcontents"
+    print "\\clearpage\\tableofcontents"
     next
 }
 /CHAPTER/ {

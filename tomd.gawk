@@ -10,8 +10,12 @@ BEGIN {
     next
 }
 /CONTENTS/ {
-    a=1
-    print "#Contents\n"
+    a=0
+    incontents=1
+    print "\\tableofcontents"
+    next
+}
+/CHAPTER/ {
     next
 }
 /ERRATA/ {
@@ -24,7 +28,10 @@ BEGIN {
         print "\\mainmatter\n"
     a=1
     inchap=1
-    print "#"
+    incontents=0
+    print "\\chapter{}\n"
+    # http://tex.stackexchange.com/questions/328008/how-to-add-description-to-toc
+    print "\\addtocontents{toc}{\\medskip\\noindent\\detokenize{"contentsdescs[chapnum++]"}\\leavevmode\\par\\medskip}\n"
     next
 }
 /GLOSSARY/ {
@@ -40,6 +47,14 @@ BEGIN {
     a=0
 }
 {
+    if (incontents==1) {
+        gsub(/\n/, " ")
+        gsub(/ +/, " ")
+        gsub(/_/, "")
+	gsub(/[0-9]+/, "\\textbf{&}")
+        contentsdescs[contentsdescnum++] = $0
+    }
+
     if (a==1) {
     	if (inchap==1) {
             sub(/\./, "", $1)

@@ -11,6 +11,9 @@
 \usepackage[latin]{babel}
 \usepackage{titlesec}
 
+\usepackage{tocloft}
+\renewcommand{\cftchappresnum}{Caput }
+
 \renewcommand\thechapter{\Roman{chapter}}
 \titleformat{\paragraph}[leftmargin]
   {\normalfont}{\theparagraph}{}{}

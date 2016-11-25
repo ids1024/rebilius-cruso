@@ -1,11 +1,17 @@
 \documentclass[11pt]{book}
-\usepackage{microtype}
+
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[latin]{babel}
 \usepackage{kpfonts}
 
+\usepackage{microtype}
+\usepackage[latin]{babel}
+\usepackage{titlesec}
+
 \renewcommand\thechapter{\Roman{chapter}}
+\titleformat{\paragraph}[leftmargin]
+  {\normalfont}{\theparagraph}{}{}
+\titlespacing{\paragraph}{25pt}{2.5pt}{0pt}
 
 % Used by pandoc
 \providecommand{\tightlist}{

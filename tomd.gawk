@@ -1,5 +1,9 @@
 #!/bin/gawk -f
 
+BEGIN {
+    RS="\n\n+"
+}
+
 /PREFACE/ {
     a=1
     print "#Preface\n"
@@ -25,13 +29,23 @@
 }
 /GLOSSARY/ {
     inchap=0
+    print "\\backmatter\n\n#Glossary\n"
+    next
+}
+/FOOTNOTES/ {
+    print "#Footnotes\n"
+    next
 }
 /End of the Project Gutenberg EBook/ {
     a=0
 }
 {
-    if (inchap==1)
-	$1 = ""
-    if (a==1)
-        print $0
+    if (a==1) {
+    	if (inchap==1) {
+            sub(/\./, "", $1)
+            print "\\paragraph{"$1"}\n"
+            $1 = ""
+        }
+        print $0"\n"
+    }
 }

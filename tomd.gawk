@@ -17,13 +17,19 @@
 }
 /CAPUT/ {
     a=1
+    inchap=1
     print "#"$0
     next
+}
+/GLOSSARY/ {
+    inchap=0
 }
 /End of the Project Gutenberg EBook/ {
     a=0
 }
 {
+    if (inchap==1)
+	$1 = ""
     if (a==1)
         print $0
 }

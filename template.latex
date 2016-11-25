@@ -27,14 +27,10 @@
 
 \begin{document}
 \frontmatter
-%\title{$title$}
-%\shorttitle{$shorttitle$}
-% The \vspace is used to remove inexplicable extra space between
-% the title and author on the title page.
-% TODO: Fix this
-%\author{\vspace{-1.5em}$author$}
-%\affiliation{$affiliation$}
-%\abstract{\input{abstract}}
+\title{Rebilius Cruso}
+\author{Daniel Defoe}
+\date{}
+\maketitle
 
 $body$
 

@@ -36,11 +36,13 @@ BEGIN {
 }
 /GLOSSARY/ {
     inchap=0
+    inglossary=1
     print "\\backmatter\n\n#Glossary\n"
     next
 }
 /FOOTNOTES/ {
     infootnotes=1
+    inglossary=0
     next
 }
 /Among WORKS by F. W. NEWMAN, are/ {
@@ -65,6 +67,8 @@ BEGIN {
             $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
         else
             $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
+        if (inglossary==1)
+            $0 = gensub(" *(.*)", "\\\\noindent \\1", 1)
         print $0"\n"
     }
 }

@@ -16,9 +16,11 @@
     next
 }
 /CAPUT/ {
+    if (inchap!=1)
+        print "\\mainmatter\n"
     a=1
     inchap=1
-    print "#"$0
+    print "#"
     next
 }
 /GLOSSARY/ {

@@ -5,11 +5,14 @@
 \usepackage[latin]{babel}
 \usepackage{kpfonts}
 
+\renewcommand\thechapter{\Roman{chapter}}
+
 % Used by pandoc
 \providecommand{\tightlist}{
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \begin{document}
+\frontmatter
 %\title{$title$}
 %\shorttitle{$shorttitle$}
 % The \vspace is used to remove inexplicable extra space between

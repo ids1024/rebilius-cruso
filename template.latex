@@ -27,10 +27,19 @@
 
 \begin{document}
 \frontmatter
-\title{Rebilius Cruso}
-\author{Daniel Defoe}
-\date{}
-\maketitle
+\begin{titlepage}
+	\centering
+	\vspace*{3cm}
+	{\scshape\LARGE Rebilius Cruso\par}
+	\vspace{0.2cm}
+	{\scshape\small Robinson Crusoe, in Latin; a book to lighten tedium to a learner\par}
+	\vspace{1cm}
+	{\Large\itshape Daniel Defoe\par}
+	\vfill
+	{\itshape Translated by Francis William Newman\par}
+	{\itshape Public Domain; 1884\par}
+	{\itshape Edition Typeset by Ian Douglas Scott\par}
+\end{titlepage}
 
 $body$
 

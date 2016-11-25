@@ -40,11 +40,11 @@ BEGIN {
     next
 }
 /FOOTNOTES/ {
-    print "#Footnotes\n"
+    infootnotes=1
     next
 }
-/End of the Project Gutenberg EBook/ {
-    a=0
+/Among WORKS by F. W. NEWMAN, are/ {
+    exit
 }
 {
     if (incontents==1) {
@@ -61,6 +61,10 @@ BEGIN {
             print "\\paragraph{"$1"}\n"
             $1 = ""
         }
+        if (infootnotes==1)
+            $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
+        else
+            $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
         print $0"\n"
     }
 }

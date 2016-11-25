@@ -23,6 +23,8 @@
 \providecommand{\tightlist}{
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+\setlength{\emergencystretch}{3em}
+
 \begin{document}
 \frontmatter
 %\title{$title$}

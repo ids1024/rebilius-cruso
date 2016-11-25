@@ -5,6 +5,9 @@
 \usepackage{kpfonts}
 
 \usepackage{microtype}
+\usepackage{luatex85}
+\usepackage[paperwidth=6in, paperheight=9in]{geometry}
+
 \usepackage[latin]{babel}
 \usepackage{titlesec}
 

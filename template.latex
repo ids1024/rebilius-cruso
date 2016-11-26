@@ -20,6 +20,10 @@
 
 \usepackage{tocloft}
 \renewcommand{\cftchappresnum}{Caput }
+\addto\captionslatin{
+  \renewcommand{\contentsname}
+    {Contents}
+}
 
 \renewcommand\thechapter{\Roman{chapter}}
 \titleformat{\paragraph}[leftmargin]

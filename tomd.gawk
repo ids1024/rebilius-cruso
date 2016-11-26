@@ -58,6 +58,7 @@ BEGIN {
     print "\\begin{center}"
     print "\\minibox[frame,c]{" $0 "}"
     print "\\end{center}"
+    print "\\noindent"
     next
 }
 
@@ -72,12 +73,13 @@ section=="contents" {
     contentsdescs[contentsdescnum++] = $0
 }
 
+section=="chapter" && match($1, /[0-9]+\./) != 0 {
+    sub(/\./, "", $1)
+    print "\\paragraph{"$1"}\n"
+    $1 = ""
+}
+
 a==1 {
-    if (section=="chapter") {
-        sub(/\./, "", $1)
-        print "\\paragraph{"$1"}\n"
-        $1 = ""
-    }
     if (section=="footnotes")
         $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
     else

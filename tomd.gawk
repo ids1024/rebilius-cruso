@@ -11,7 +11,7 @@ BEGIN {
 }
 /CONTENTS/ {
     a=0
-    incontents=1
+    section="contents"
     print "\\clearpage\\tableofcontents"
     next
 }
@@ -24,32 +24,29 @@ BEGIN {
     next
 }
 /CAPUT/ {
-    if (inchap!=1)
+    if (section!="chapter")
         print "\\mainmatter\n"
     a=1
-    inchap=1
-    incontents=0
+    section="chapter"
     print "\\chapter{}\n"
     # http://tex.stackexchange.com/questions/328008/how-to-add-description-to-toc
     print "\\addtocontents{toc}{\\medskip\\noindent\\detokenize{"contentsdescs[chapnum++]"}\\leavevmode\\par\\medskip}\n"
     next
 }
 /GLOSSARY/ {
-    inchap=0
-    inglossary=1
+    section="glossary"
     print "\\backmatter\n\n#Glossary\n"
     next
 }
 /FOOTNOTES/ {
-    infootnotes=1
-    inglossary=0
+    section="footnotes"
     next
 }
 /Among WORKS by F. W. NEWMAN, are/ {
     exit
 }
 
-incontents==1 {
+section=="contents" {
     gsub(/\s+/, " ")
     $0 = gensub(/_(.*)_/, "\\\\textit{\\1}", "g")
     gsub(/[0-9]+/, "\\textbf{&}")
@@ -57,16 +54,16 @@ incontents==1 {
 }
 
 a==1 {
-    if (inchap==1) {
+    if (section=="chapter") {
         sub(/\./, "", $1)
         print "\\paragraph{"$1"}\n"
         $1 = ""
     }
-    if (infootnotes==1)
+    if (section=="footnotes")
         $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
     else
         $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
-    if (inglossary==1)
+    if (section=="glossary")
         $0 = gensub(" *(.*)", "\\\\noindent \\1", 1)
     print $0"\n"
 }

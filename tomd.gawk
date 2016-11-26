@@ -73,10 +73,8 @@ section=="contents" {
     contentsdescs[contentsdescnum++] = $0
 }
 
-section=="chapter" && match($1, /[0-9]+\./) != 0 {
-    sub(/\./, "", $1)
-    print "\\paragraph{"$1"}\n"
-    $1 = ""
+section=="chapter" {
+    $1 = gensub(/([0-9]+)\./, "\\\\paragraph{\\1}\n", 1)
 }
 
 a==1 {

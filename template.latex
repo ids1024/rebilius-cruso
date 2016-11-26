@@ -2,7 +2,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{kpfonts}
+\usepackage[oldstylenums]{kpfonts}
 
 \usepackage{microtype}
 \usepackage{luatex85}

@@ -11,6 +11,8 @@
 \usepackage[greek, latin]{babel}
 \usepackage{titlesec}
 
+\usepackage{minibox} % Used in GAWK script
+
 \usepackage{newunicodechar}
 \newunicodechar{ȳ}{\={y}}
 \newunicodechar{⸤}{\hspace{0.3ex}\makebox[0pt]{\raisebox{-0.5ex}{\(\llcorner\)}}}

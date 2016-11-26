@@ -49,6 +49,18 @@ BEGIN {
     next
 }
 
+# This appears once in the book
+/+--------------------------------+/ {
+    gsub(/\+-+\+/, "")
+    gsub(/\|/, "")
+    gsub(/\n/, "\\\\\n")
+    $0 = gensub(/_([^_]*)_/, "\\\\textit{\\1}", "g")
+    print "\\begin{center}"
+    print "\\minibox[frame,c]{" $0 "}"
+    print "\\end{center}"
+    next
+}
+
 /Among WORKS by F. W. NEWMAN, are/ {
     exit
 }

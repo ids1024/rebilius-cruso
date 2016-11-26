@@ -9,20 +9,24 @@ BEGIN {
     print "#Preface\n"
     next
 }
+
 /CONTENTS/ {
     a=0
     section="contents"
     print "\\clearpage\\tableofcontents"
     next
 }
+
 /CHAPTER/ {
     next
 }
+
 /ERRATA/ {
     # Gutenberg text has errata corrected
     a=0
     next
 }
+
 /CAPUT/ {
     if (section!="chapter")
         print "\\mainmatter\n"
@@ -33,15 +37,18 @@ BEGIN {
     print "\\addtocontents{toc}{\\medskip\\noindent\\detokenize{"contentsdescs[chapnum++]"}\\leavevmode\\par\\medskip}\n"
     next
 }
+
 /GLOSSARY/ {
     section="glossary"
     print "\\backmatter\n\n#Glossary\n"
     next
 }
+
 /FOOTNOTES/ {
     section="footnotes"
     next
 }
+
 /Among WORKS by F. W. NEWMAN, are/ {
     exit
 }

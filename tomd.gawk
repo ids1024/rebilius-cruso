@@ -48,26 +48,25 @@ BEGIN {
 /Among WORKS by F. W. NEWMAN, are/ {
     exit
 }
-{
-    if (incontents==1) {
-        gsub(/\s+/, " ")
-        $0 = gensub(/_(.*)_/, "\\\\textit{\\1}", "g")
-	gsub(/[0-9]+/, "\\textbf{&}")
-        contentsdescs[contentsdescnum++] = $0
-    }
 
-    if (a==1) {
-    	if (inchap==1) {
-            sub(/\./, "", $1)
-            print "\\paragraph{"$1"}\n"
-            $1 = ""
-        }
-        if (infootnotes==1)
-            $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
-        else
-            $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
-        if (inglossary==1)
-            $0 = gensub(" *(.*)", "\\\\noindent \\1", 1)
-        print $0"\n"
+incontents==1 {
+    gsub(/\s+/, " ")
+    $0 = gensub(/_(.*)_/, "\\\\textit{\\1}", "g")
+    gsub(/[0-9]+/, "\\textbf{&}")
+    contentsdescs[contentsdescnum++] = $0
+}
+
+a==1 {
+    if (inchap==1) {
+        sub(/\./, "", $1)
+        print "\\paragraph{"$1"}\n"
+        $1 = ""
     }
+    if (infootnotes==1)
+        $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
+    else
+        $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
+    if (inglossary==1)
+        $0 = gensub(" *(.*)", "\\\\noindent \\1", 1)
+    print $0"\n"
 }

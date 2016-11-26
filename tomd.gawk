@@ -1,17 +1,17 @@
 #!/bin/gawk -f
 
 BEGIN {
-    RS="\n\n+"
+    RS = "\n\n+"
 }
 
 /PREFACE/ {
-    section="preface"
+    section = "preface"
     print "#Preface\n"
     next
 }
 
 /CONTENTS/ {
-    section="contents"
+    section = "contents"
     print "\\clearpage\\tableofcontents"
     next
 }
@@ -27,23 +27,23 @@ BEGIN {
 }
 
 /CAPUT/ {
-    if (section!="chapter")
+    if (section != "chapter")
         print "\\mainmatter\n"
     section="chapter"
     print "\\chapter{}\n"
     # http://tex.stackexchange.com/questions/328008/how-to-add-description-to-toc
-    print "\\addtocontents{toc}{\\medskip\\noindent\\detokenize{"contentsdescs[chapnum++]"}\\leavevmode\\par\\medskip}\n"
+    print "\\addtocontents{toc}{\\medskip\\noindent\\detokenize{" contentsdescs[chapnum++] "}\\leavevmode\\par\\medskip}\n"
     next
 }
 
 /GLOSSARY/ {
-    section="glossary"
+    section = "glossary"
     print "\\backmatter\n\n#Glossary\n"
     next
 }
 
 /FOOTNOTES/ {
-    section="footnotes"
+    section = "footnotes"
     next
 }
 
@@ -64,7 +64,7 @@ BEGIN {
     exit
 }
 
-section=="contents" {
+section == "contents" {
     gsub(/\s+/, " ")
     $0 = gensub(/_(.*)_/, "\\\\textit{\\1}", "g")
     gsub(/[0-9]+/, "\\textbf{&}")
@@ -72,19 +72,19 @@ section=="contents" {
     next
 }
 
-section=="chapter" {
+section == "chapter" {
     $1 = gensub(/([0-9]+)\./, "\\\\paragraph{\\1}\n", 1)
     $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
 }
 
-section=="glossary" {
+section == "glossary" {
     $0 = gensub(" *(.*)", "\\\\noindent \\1", 1)
 }
 
-section=="footnotes" {
+section == "footnotes" {
     $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
 }
 
-section!="" {
+section != "" {
     print $0"\n"
 }

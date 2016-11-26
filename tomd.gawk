@@ -74,17 +74,17 @@ section=="contents" {
 
 section=="chapter" {
     $1 = gensub(/([0-9]+)\./, "\\\\paragraph{\\1}\n", 1)
+    $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
 }
 
 section=="glossary" {
-        $0 = gensub(" *(.*)", "\\\\noindent \\1", 1)
+    $0 = gensub(" *(.*)", "\\\\noindent \\1", 1)
+}
+
+section=="footnotes" {
+    $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
 }
 
 section!="" {
-    if (section=="footnotes")
-        $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
-    else
-        $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
-
     print $0"\n"
 }

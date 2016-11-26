@@ -5,13 +5,12 @@ BEGIN {
 }
 
 /PREFACE/ {
-    a=1
+    section="preface"
     print "#Preface\n"
     next
 }
 
 /CONTENTS/ {
-    a=0
     section="contents"
     print "\\clearpage\\tableofcontents"
     next
@@ -23,14 +22,13 @@ BEGIN {
 
 /ERRATA/ {
     # Gutenberg text has errata corrected
-    a=0
+    section=""
     next
 }
 
 /CAPUT/ {
     if (section!="chapter")
         print "\\mainmatter\n"
-    a=1
     section="chapter"
     print "\\chapter{}\n"
     # http://tex.stackexchange.com/questions/328008/how-to-add-description-to-toc
@@ -71,18 +69,22 @@ section=="contents" {
     $0 = gensub(/_(.*)_/, "\\\\textit{\\1}", "g")
     gsub(/[0-9]+/, "\\textbf{&}")
     contentsdescs[contentsdescnum++] = $0
+    next
 }
 
 section=="chapter" {
     $1 = gensub(/([0-9]+)\./, "\\\\paragraph{\\1}\n", 1)
 }
 
-a==1 {
+section=="glossary" {
+        $0 = gensub(" *(.*)", "\\\\noindent \\1", 1)
+}
+
+section!="" {
     if (section=="footnotes")
         $0 = gensub(/\[([A-Z])\]/, "[^\\1]:", "g")
     else
         $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
-    if (section=="glossary")
-        $0 = gensub(" *(.*)", "\\\\noindent \\1", 1)
+
     print $0"\n"
 }

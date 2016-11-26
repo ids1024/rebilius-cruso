@@ -13,8 +13,8 @@
 
 \usepackage{newunicodechar}
 \newunicodechar{ȳ}{\={y}}
-\newunicodechar{⸤}{\(\llcorner\)}
-\newunicodechar{⸥}{\(\lrcorner\)}
+\newunicodechar{⸤}{\hspace{0.3ex}\makebox[0pt]{\raisebox{-0.5ex}{\(\llcorner\)}}}
+\newunicodechar{⸥}{\makebox[0pt]{\raisebox{-0.5ex}{\(\lrcorner\)}}\hspace{0.3ex}}
 
 \usepackage{tocloft}
 \renewcommand{\cftchappresnum}{Caput }

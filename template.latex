@@ -12,6 +12,10 @@
 \usepackage{titlesec}
 
 \usepackage{minibox} % Used in GAWK script
+\usepackage{longtable} % Used by pandoc
+\usepackage{booktabs} % Used by pandoc
+\let\oldlongtable\longtable
+\renewcommand{\longtable}{\footnotesize\oldlongtable}
 
 \usepackage{newunicodechar}
 \newunicodechar{ȳ}{\={y}}

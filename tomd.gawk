@@ -60,6 +60,18 @@ BEGIN {
     next
 }
 
+# This appears once
+/MALA MEA/ {
+    intable = 1
+    print $0
+    print "  ---------                              ------------------"
+    next
+}
+
+$1 == "50." {
+    intable = 0
+}
+
 /Among WORKS by F. W. NEWMAN, are/ {
     exit
 }
@@ -72,7 +84,7 @@ section == "contents" {
     next
 }
 
-section == "chapter" {
+section == "chapter" && !intable {
     $1 = gensub(/([0-9]+)\./, "\\\\paragraph{\\1}\n", 1)
     $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
 }

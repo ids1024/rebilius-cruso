@@ -34,6 +34,7 @@ BEGIN {
 }
 
 /CAPUT/ {
+    chapstart = 1
     if (section != "chapter")
         print "\\mainmatter\n"
     section="chapter"
@@ -92,8 +93,13 @@ section == "contents" {
 }
 
 section == "chapter" && !intable {
+    if (chapstart) {
+        $2 = "\\noindent " $2
+        chapstart = 0
+    }
     $1 = gensub(/([0-9]+)\./, "\\\\paragraph{\\1}\n", 1, $1)
     $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
+
 }
 
 section == "glossary" {

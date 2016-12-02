@@ -92,7 +92,7 @@ section == "contents" {
 }
 
 section == "chapter" && !intable {
-    $1 = gensub(/([0-9]+)\./, "\\\\paragraph{\\1}\n", 1)
+    $1 = gensub(/([0-9]+)\./, "\\\\paragraph{\\1}\n", 1, $1)
     $0 = gensub(/\[([A-Z])\]/, "[^\\1]", "g")
 }
 

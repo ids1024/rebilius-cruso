@@ -1,5 +1,12 @@
 #!/bin/gawk -f
 
+
+# Changes _text_ to \textit{text}
+function italic(str) {
+    return gensub(/_([^_]*)_/, "\\\\textit{\\1}", "g", str)
+}
+
+
 BEGIN {
     RS = "\n\n+"
 }
@@ -52,7 +59,7 @@ BEGIN {
     gsub(/\+-+\+/, "")
     gsub(/\|/, "")
     gsub(/\n/, "\\\\\n")
-    $0 = gensub(/_([^_]*)_/, "\\\\textit{\\1}", "g")
+    $0 = italic($0)
     print "\\begin{center}"
     print "\\minibox[frame,c]{" $0 "}"
     print "\\end{center}"
@@ -78,7 +85,7 @@ $1 == "50." {
 
 section == "contents" {
     gsub(/\s+/, " ")
-    $0 = gensub(/_(.*)_/, "\\\\textit{\\1}", "g")
+    $0 = italic($0)
     gsub(/[0-9]+/, "\\textbf{&}")
     contentsdescs[contentsdescnum++] = $0
     next
